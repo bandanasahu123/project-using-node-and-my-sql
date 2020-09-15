@@ -1,0 +1,170 @@
+<%- include ('./layouts/header') %>
+<style>
+    .errorMsg {
+        color: red;
+    }
+</style>
+
+<header class="masthead text-center text-white"> </header>
+<section class="login"
+    style="background-image: -webkit-linear-gradient( 136deg, rgb(255, 221, 0) 0%, rgb(250, 201, 112) 100%);">
+    <div class="container login-container ">
+
+        <div class="row login-form-1 bg-white" style="padding: 5%;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.2), 0 9px 26px 0 rgba(0, 0, 0, 0.19);
+    height: auto;">
+
+            <div class="col-md-6">
+                <article class="card-body py-0 px-0 mx-auto">
+
+
+                    <span class="card-title mt-3 text-center errorMsg errClass"></span>
+                    <!--           -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                        </div>
+                        <input name="name" class="form-control name" placeholder="Name" type="text">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+                        </div>
+                        <input name="email" class="form-control emailid" placeholder="Email address" type="email">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input name="password" class="form-control password" placeholder="Password" type="password">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input name="confirmpassword" class="form-control cnfrmPass" placeholder="Confirm Password"
+                            type="password">
+                    </div>
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+                        </div>
+
+                        <input name="" class="form-control conatctNum" placeholder="Phone number" type="text">
+                    </div> <!-- form-group// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-tag"></i> </span>
+                        </div>
+                        <select class="form-control catId">
+                            <option value="0">Select category</option>
+                            <option value="1">Design &amp; Graphics</option>
+                            <option value="2">Writing</option>
+                            <option value="3">Web Development</option>
+                            <option value="4">Digital Marketing</option>
+                            <option value="5">Video &amp; Animation</option>
+                            <option value="6">Music &amp; Audio</option>
+                            <option value="7">Design</option>
+                        </select>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-list-alt"></i> </span>
+                        </div>
+                        <select class="form-control subcatClass" disabled="">
+                            <option value="0" selected=""> Select Subcategory</option>
+                            <option>Designer</option>
+                            <option>Manager</option>
+                            <option>Accaunting</option>
+                        </select>
+                    </div> <!-- form-group end.// -->
+                    <div class="form-group input-group in-grp">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                        </div>
+                        <input class="form-control uploadFiles" name="profile" placeholder="Portfolio Image"
+                            type="file">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+                        </div>
+                        <input class="form-control skillsets" placeholder="Skill Set" type="text">
+
+                    </div> <!-- form-group// -->
+            </div>
+            <div class="col-md-6">
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+                    </div>
+
+                    <input name="" class="form-control position" placeholder="Current Position" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-map-marker"></i> </span>
+                    </div>
+
+                    <input name="" class="form-control location" placeholder="Current Location" type="text">
+                </div>
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-info-circle"></i> </span>
+                    </div>
+
+                    <textarea class="form-control aboutClass" placeholder="About Yourself"></textarea>
+
+                    <!-- <input name="" class="form-control aboutClass" placeholder="About Yourself" type="textarea"> -->
+                </div>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-link"></i> </span>
+                    </div>
+                    <input class="form-control refLink" placeholder="Portfolio Reference Link" type="text">
+                </div>
+                <div class="form-group input-group in-grp">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"> <i class="fa fa-image"></i> </span>
+                    </div>
+                    <input class="form-control uploadCV" accept=".pdf, .doc, .docx" name="profile"
+                        placeholder="Upload portfolio" type="file">
+
+
+                </div>
+
+                <div class="field hide" align="left">
+                    <h5>Upload latest designs</h5>
+                    <div class="preloaded-images">
+                        <div class="edited_imges row"></div>
+                    </div>
+                    <input type="file" id="uploadFiles" name="files[]" multiple="">
+                </div>
+                <div class="form-check mt-4">
+                    <!-- <input class="form-check-input condition" type="checkbox" name="exampleRadios" value="check"
+                        id="exampleRadios2" value="option2"> -->
+                    <input type="checkbox" required name="checkbox" value="check" id="agree" />
+
+
+                    <label class="form-check-label " for="exampleRadios2">
+                        <p>I have read and accepted the<a href="#" class="text"> Terms and Conditions</a>.</p>
+                    </label>
+                </div>
+                <div class="form-group">
+
+                    <button type="submit" class="btn btn-primary btn-block registerButton mb-3"> Create Account
+                    </button>
+                    <center><a href="/public/login" id="" style="text-align: center;">Already have an account? Sign
+                            In</a></center>
+                </div>
+                <!--                <p class="text-center">Have an account? <a href="">Log In</a> </p>-->
+
+            </div>
+        </div>
+        </article>
+    </div>
+</section>
+
+<%- include ('./layouts/footer') %>
+<script language="JavaScript" type="text/javascript" src="/js/allpages/register.js"></script>
+<script src="/js/allpages/portfoliodetails.js"></script>

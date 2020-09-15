@@ -1,0 +1,128 @@
+<!-- Footer -->
+<footer class="py-3 bg-black container-fluid">
+    <div class="row">
+        <div class="col-md-6 d-flex">
+            <a href="/public/privacy" class="mr-4 text-white ">Privacy</a>
+            <a href="/public/community" class="mr-4 text-white ">Community</a>
+            <a href="/public/help" class="mr-2 text-white ">Help</a>
+        </div>
+        <div class="col-md-6">
+            <p class="m-0 text-right text-white small">© 2020 ORIGAMI. All Rights Reserved.</p>
+        </div>
+    </div>
+    <!-- /.container -->
+</footer>
+
+<!-- Bootstrap core JavaScript -->
+<script src="/js/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="/js/bootstrap.min.js"></script>
+<script src="/js/toastr.min.js"></script>
+<script src="/js/dataTables.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/js/bootstrap-select.min.js"></script>
+<!-- <script src="https://cdn.datatables.net/fixedheader/3.1.7/js/dataTables.fixedHeader.min.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+<script src="/js/modernizr-2.6.2.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/custombox/4.0.3/custombox.min.js"></script>
+<script src="/js/main.js"></script>
+<script src="/js/jquery.waypoints.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+<script>
+    $(document).ready(function () {
+        var show_btn = $('.show-modal');
+        var show_btn = $('.show-modal');
+        //$("#testmodal").modal('show');
+
+        show_btn.click(function () {
+            $("#testmodal").modal('show');
+        })
+    });
+
+    $(function () {
+        $('#element').on('click', function (e) {
+
+            var modal = new Custombox.modal({
+                content: {
+                    target: '#testmodal-1',
+                    effect: 'fadein'
+                }
+            });
+
+            modal.open();
+            e.preventDefault();
+        });
+    });
+    $(function () {
+        $(".img-w").each(function () {
+            $(this).wrap("<div class='img-c'></div>")
+            let imgSrc = $(this).find("img").attr("src");
+            $(this).css('background-image', 'url(' + imgSrc + ')');
+        })
+
+    })
+
+    function prev() {
+        document.getElementById('slider-container').scrollLeft -= 270;
+    }
+
+    function next() {
+        document.getElementById('slider-container').scrollLeft += 270;
+    }
+
+    $(document).on('click', '.logoutBtn', function () {
+        // window.location.href = '/auth/logout'
+        let token = sessionStorage.getItem('token')
+
+        $.ajax({
+            type: 'POST',
+            url: '/private/logout',
+            headers: {
+        Authorization: 'Bearer ' + token
+      },
+            data: {
+                id: sessionStorage.getItem('users')
+            },
+            success: function (response) {
+
+                console.log('------------ response ----------', response)
+                if (response.statusCode == 200) {
+                    sessionStorage.removeItem('users')
+                    sessionStorage.removeItem('token')
+                    window.location.href = '/public/login'
+                } else {
+                    toastr.error(response.message, { timeOut: 5000 })
+                }
+            }
+        })
+    })
+</script>
+
+
+<script>
+    $(document).ready(function () {
+        toastr.options.positionClass = "toast-top-right";
+        toastr.options.progressBar = true;
+        toastr.options.preventDuplicates = true
+        toastr.options.maxOpened = 1
+    });
+</script>
+
+<script>
+    $('#forgotPwd').click(function () {
+        console.log('---------- clicked ---------------')
+        $('.login_form').css('display', 'none');
+        $('.forget_pws_form').css('display', 'block');
+    })
+    $('.return_login').click(function () {
+        $('.forget_pws_form').css('display', 'none');
+        $('.login_form').css('display', 'block');
+    })
+</script>
+
+</body>
+
+</html>

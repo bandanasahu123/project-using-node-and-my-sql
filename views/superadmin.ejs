@@ -1,0 +1,352 @@
+<%- include ('./layouts/header') %>
+
+<header class="masthead text-center text-white"> </header>
+
+
+
+
+<!-- List of user profiles -->
+<section class="bg-secondary py-5">
+    <div class="col-md-12">
+        <!-- ================================
+                      widget box main
+                      ================================-->
+        <section class="dash-main-widget-box">
+            <div class="row nav-pills">
+                <div class="col-sm-3 si-box-padding">
+                    <div class="dash-box">
+                        <h2 class="adminCountVal"><%= adminDetails.length %></h2>
+                        <p class="mb-0">Admin List</p>
+                        <a data-toggle="pill" href="#home">Know More</a>
+                    </div>
+                    <!-- end of dash-box -->
+                </div>
+                <!-- end of si-box-padding -->
+                <div class="col-sm-3 si-box-padding">
+                    <div class="dash-box">
+                        <h2><%= projectDetails.length %></h2>
+                        <p class="mb-0">Project Onboarded</p>
+                        <a data-toggle="pill" href="#project">Know More</a>
+                    </div>
+                    <!-- end of dash-box -->
+                </div>
+                <!-- end of si-box-padding -->
+                <div class="col-sm-3 si-box-padding">
+                    <div class="dash-box">
+                        <h2><%= invoiceDetails.length %></h2>
+                        <p class="mb-0">Invoice Generated</p>
+                        <a data-toggle="pill" href="#Invoice">Know More</a>
+                    </div>
+                    <!-- end of dash-box -->
+                </div>
+                <!-- end of si-box-padding  -->
+
+                <div class="col-sm-3 si-box-padding userColumn">
+                    <div class="dash-box">
+                        <h2><%= usersDetails.length %></h2>
+
+                        <a href="/auth/dashboard">
+                            <p class="mb-0">All Registered Profiles</p>
+                        </a>
+                        <a data-toggle="pill" href="#Users">Know More</a>
+                    </div>
+                    <!-- end of dash-box -->
+                </div>
+                <!-- end of si-box-padding -->
+            </div>
+            <!-- end of row -->
+        </section>
+        <!-- end of widget box main -->
+
+
+        <span class="adminCount" style="display: none;"><%- adminDetails.length %></span>
+
+
+
+        <!-- ================================
+                      Admin List
+                      ================================-->
+        <section class="merchant-table container-fluid px-0 my-5">
+            <div class="col-md-12 si-box-padding px-0 tab-content">
+
+                <div class="border-table widget-wrapper-sm tab-pane active" id="home">
+                    <div class="table-head clearfix">
+                        <p class="float-left">Admin List</p>
+                        <a href="#" data-toggle="modal" data-target="#squarespaceModal"
+                            class="btn sm-custom-btn float-right">Add New Admin</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table sm-custom-table adminTable">
+                            <thead>
+                                <tr>
+                                    <th>Sl.No</th>
+                                    <th>Name</th>
+                                    <th>Email ID</th>
+                                    <th>Department</th>
+                                    <th>Role</th>
+                                    <th class="action-td">Status</th>
+                                    <th class="action-td">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for (var i=0;i < adminDetails.length;i++) {%>
+                                <tr>
+
+                                    <td>
+                                        <div class="name-td">
+                                            <p><%= i+1 %></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="name-td">
+                                            <p><%= adminDetails[i].dataValues.name %></p>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="status-range clearfix">
+                                            <p><%= adminDetails[i].dataValues.email %></p>
+                                        </div>
+
+                                    </td>
+                                    <td><%= adminDetails[i].dataValues.position  %></td>
+                                    <td><%= adminDetails[i].dataValues.role === 3 ? 'Main Admin' : 'Admin'  %></td>
+                                    <td class="action-td">
+                                        <div class="active">
+                                            <%= adminDetails[i].dataValues.admin_status === 1 ? 'active' :'inactive' %>
+                                        </div>
+                                    </td>
+                                    <td class="action-center action-td deleteAdmin">
+                                        <a class="delete" id="<%- adminDetails[i].dataValues.id %>"><i
+                                                class="fa fa-trash"></i></a>
+                                    </td>
+                                </tr>
+                                <%}%>
+                               
+
+                            </tbody>
+                        </table>
+                        <!-- end of sm-custom-table -->
+                    </div>
+                    <!-- end of table-responsive -->
+                </div>
+                <!-- end of border-table -->
+         
+            
+                <div class="border-table widget-wrapper-sm tab-pane fade" id="project">
+                    <div class="table-head clearfix">
+                        <p class="float-left">Project List</p>
+                       
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table sm-custom-table projectTable">
+                            <thead>
+                                <tr>
+                                    <th class="img-th">Si.No</th>
+                                    <th>User Name</th>
+                                    <th>Project Name</th>
+                                    <th>Department</th>
+                                    <th>Assign by</th>
+                                    <th>Status</th>
+                                    <th>Staging</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0;i < projectDetails.length ; i++){ %>
+                                <tr>
+                                    <td> <%= i+1 %> </td>
+
+                                    <td>
+                                        <% let output=[] %>
+                                        <% if(projectDetails[i].user.length > 0){ %>
+                                        <% for(let j=0;j < projectDetails[i].user.length ; j++){ %>
+                                        <% output.push(projectDetails[i].user[j].dataValues.name) %>
+                                        <% } %>
+                                        <%= output.join(", ") %>
+                                    </td>
+                                    <%}else{%>
+                                    <td> <%= projectDetails[i].user[0].dataValues.name %> </td>
+                                    <%}%>
+                                    <td> <%= projectDetails[i].project.dataValues.name %> </td>
+                                    <td> <%= projectDetails[i].project.Category.dataValues.name %> </td>
+                                    <td> Deepa </td>
+                                    <td class="action-td">
+                                        <div class="active">
+                                            <%= projectDetails[i].project.dataValues.status === 1 ? 'Active' : 'In-active' %>
+                                        </div>
+                                    </td>
+                                    <td class="action-td">
+                                        <div class="active">
+                                            <%= projectDetails[i].project.dataValues.staging === 1 ? 'Live' : projectDetails[i].project.dataValues.staging === 2 ? 'Testing' : projectDetails[i].project.dataValues.staging === 3 ? 'Completed' :projectDetails[i].project.dataValues.staging === 4 ? 'Hold' : 'Deffered' %>
+                                        </div>
+                                    </td>
+
+                                </tr>
+                                <% } %>
+
+                            </tbody>
+                        </table>
+                        <!-- end of sm-custom-table -->
+                    </div>
+                    <!-- end of table-responsive -->
+                </div>
+                <!-- end of border-table -->
+
+
+                <div class="border-table widget-wrapper-sm tab-pane  fade" id="Invoice">
+                    <div class="table-head clearfix">
+                        <p class="float-left">Invoice List</p>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table sm-custom-table invoiceTable">
+                            <thead>
+                                <tr>
+                                    <th class="img-th">ID</th>
+                                    <th>Date</th>
+                                    <th>Project Name</th>
+                                    <th>Project Cost</th>
+                                    <th>Project Duration</th>
+                                    <th>Created By</th>
+                                    <th>Action</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(let i=0;i < invoiceDetails.length ; i++){ %>
+                                <tr>
+                                    <td> <%= i+1 %> </td>
+                                    <td> <%= new Date(invoiceDetails[0].date).toLocaleDateString("en-US") %> </td>
+                                    <td><%= parseFloat(invoiceDetails[0].amount) %></td>
+                                    <td> <%= invoiceDetails[0].total_days %> days </td>
+                                    <td> 2 Months </td>
+                                    <td> Deepa </td>
+                                    <td> View </td>
+                                </tr>
+
+                                <% } %>
+                            </tbody>
+                        </table>
+                        <!-- end of sm-custom-table -->
+                    </div>
+                    <!-- end of table-responsive -->
+                </div>
+                <!-- end of border-table -->
+
+                <div class="border-table widget-wrapper-sm tab-pane fade" id="Users">
+                    <div class="table-head clearfix">
+                        <p class="float-left">Profile List</p>
+
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table userTable table-striped table-bordered nowrap" style="width:100%">
+                            <thead>
+                                <tr>
+                                    <th class="img-th">Id</th>
+                                    <th>User Name</th>
+                                    <th>Email Id</th>
+                                    <th>Designation</th>
+                                    <th>Action</th>
+                                    <td>Rating</td>
+                                    <th>View</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                <% for (var i=0;i < usersDetails.length;i++) {%>
+                                <tr>
+                                    <td> <%= i+1 %> </td>
+                                    <td><%= usersDetails[i].dataValues.name %> </td>
+                                    <td> <%= usersDetails[i].dataValues.email %></td>
+                                    <td> <%= usersDetails[i].dataValues.position %></td>
+                                    <td class="action-td">
+                                        <div class="active">
+                                            <%= usersDetails[i].dataValues.status === 1 ? 'Pending' : usersDetails[i].dataValues.status === 2 ? 'Approved' : usersDetails[i].dataValues.status === 3 ? 'Rejected' : 'Deleted'   %>
+                                        </div>
+                                    </td>
+                                    <td class="action-td">
+                                        <div class="active">
+                                            <%= usersDetails[i].dataValues.rating === null ? 'Level 1' : usersDetails[i].dataValues.rating  %>
+                                        </div>
+                                    </td>
+                                    <td> <a href="/auth/profile_details/<%- usersDetails[i].dataValues.id %>">View
+                                            Profile</a> </td>
+
+                                </tr>
+                                <%}%>
+                </tbody>
+            </table>
+            <!-- end of sm-custom-table -->
+        </div>
+        <!-- end of table-responsive -->
+    </div>
+    <!-- end of border-table -->
+</div>
+<!-- end of col-md-12 -->
+</section>
+<!-- end of merchant-table --></div>
+</section>
+
+<!-- Add new admin Modal -->
+<!-- line modal -->
+<div class="modal fade" id="squarespaceModal" tabindex="-1" role="dialog" aria-labelledby="modalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span
+                        class="sr-only">Close</span></button>
+
+            </div>
+            <div class="modal-body">
+                <!-- content goes here -->
+                <form>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control adminName" id="exampleInputName" placeholder="Enter Name">
+                    </div>
+                    <div class="form-group">
+
+                        <input type="email" class="form-control adminEmail" id="exampleInputEmail1" placeholder="Enter Email">
+                    </div>
+                    <div class="form-group">
+
+                        <input type="password" class="form-control adminPassword" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+
+                        <input type="password" class="form-control adminConfirmPassword" id="exampleInputconfirmPassword1"
+                            placeholder="Confirm Password">
+                    </div>
+                    <div class="form-group">
+
+                        <input type="text" class="form-control adminDesignation" id="exampleInputDesignation" placeholder="Department">
+                    </div>
+                    <div class="form-group role">
+                        <p>Please select your role:</p>
+                        <label class="radio-inline">
+                            <input type="radio" name="admin" value="3">Main Admin
+                          </label>
+                          <label class="radio-inline">
+                            <input type="radio" name="admin" value="0">Admin
+                          </label>
+                     </div>
+
+                    <button type="button" class="btn btn-default addAdminBtn">Submit</button>
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<%- include ('./layouts/footer') %>
+                                <script>
+                                    $(".dash-box a").click(function () {
+                                        $(".dash-box a").removeClass("active");
+                                        $(this).parent().addClass("active");
+                                    });
+                                </script>
+                                <script src="/js/allpages/superadmin.js"></script>

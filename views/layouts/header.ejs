@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Origami Portal</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="/css/toastr.css" rel="stylesheet">
+  <link href="/css/dataTables.css" rel="stylesheet">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.14/dist/css/bootstrap-select.min.css">
+  <!-- <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.7/css/fixedHeader.bootstrap.min.css"> -->
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+
+  <!-- Custom fonts for this template -->
+  <link href="/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom styles for this template -->
+  <link href="/css/portal.css" rel="stylesheet">
+
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/custombox/4.0.3/custombox.min.css">
+
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+    <div class="container-fluid">
+      <% if(sessionData === false){ %>
+      <a class="navbar-brand" href="/"><img src="/img/logo.png"></a>
+      <%}else if(sessionData === true && role === 'user'){%>
+      <a class="navbar-brand" href="/auth/profile-dashboard"><img src="/img/logo.png"></a>
+      <%}else if(sessionData === true && role === 'superadmin'){%>
+      <a class="navbar-brand" href="/auth/superadmin-dashboard"><img src="/img/logo.png"></a>
+      <%}else if(sessionData === true && role === 'mainadmin'){%>
+      <a class="navbar-brand" href="/auth/admin-dashboard"><img src="/img/logo.png"></a>
+      <%}else if(sessionData === true && role === 'admin'){%>
+      <a class="navbar-brand" href="/auth/team-dashboard"><img src="/img/logo.png"></a>
+      <%}else{%>
+      <a class="navbar-brand" href="/auth/dashboard"><img src="/img/logo.png"></a>
+      <%}%>
+
+      
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+        aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item xs-hidden">
+            <!-- Search -->
+            <div class="d-flex justify-content-center h-100">
+              <div class="searchbar">
+                <input class="search_input" type="text" name="" placeholder="Search...">
+                <a href="#" class="search_icon"><i class="fa fa-search"></i></a>
+              </div>
+            </div>
+          </li>
+          <% if(sessionData !== true){ %>
+      <li class="nav-item">
+        <a class="nav-link ml-3 pt-3" href="/public/login">Sign In</a>
+      </li>
+      <%}else{%>
+      <li class="nav-item">
+        <a class="nav-link ml-3 pt-3 logoutBtn" href="#">Sign Out</a>
+      </li>
+      <%}%>
+        </ul>
+      </div>
+    </div>
+  </nav>

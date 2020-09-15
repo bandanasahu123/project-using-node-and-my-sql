@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= title %></title>
+    <style>
+        @mixin vertical-align($position: relative) {
+            position: $position;
+            top: 50%;
+            -webkit-transform: translateY(-50%);
+            -ms-transform: translateY(-50%);
+            transform: translateY(-50%);
+        }
+        body, html {
+            background: #16A085;
+        }
+        #wrapper {
+            width: 600px;
+            margin: 0 auto;
+            margin-top: 7%;
+        }
+        h1 {
+            color: #EEE;
+            text-shadow: -1px -2px 3px rgba(17, 17, 17, 0.3);
+            text-align: center;
+            font-family: "Monsterrat", sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            font-size: 80px;
+            margin-bottom: -5px;
+        }
+        h1 underline {
+            border-top: 5px solid rgba(26, 188, 156, 0.3);
+            border-bottom: 5px solid rgba(26, 188, 156, 0.3);
+        }
+        h3 {
+            width: 570px;
+            margin-left: 16px;
+            font-family: "Lato", sans-serif;
+            font-weight: 600;
+            color: #EEE;
+        }
+
+    </style>
+</head>
+
+<body>
+<div id="wrapper" class="animated zoomIn">
+    <center><img src="/images/logo.png"></center>
+
+    <h1>
+        <underline>Thank you!</underline>
+    </h1>
+    <h3>
+        Thank you for signing-up, it means a lot to us, just like you do! We really appreciate you giving us a moment of your time. 
+        <p>To login your account please click on <a href="/public/login">Login</a> to see your details. </p>      
+    </h3>
+</div>
+
+</body>
+</html>

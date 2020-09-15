@@ -1,0 +1,634 @@
+<%- include ('./layouts/header') %>
+
+<header class="masthead text-center text-white"> </header>
+
+<!-- List of user profiles -->
+<section class="bg-secondary">
+    <!-- end of common-head-wrapper-sm -->
+    <div class="container-fluid pb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <aside class="white-smooth-wrapper no-margin">
+
+                    <ul class="nav nav-tabs flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#newregister">New Profiles</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#all-profiles">All Profiles</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#notification">Profile Notification <span
+                                    class="badge badge-danger">New</span></a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#all-projects">All Projects</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#new-projects">Add New Project</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#invoice-details">Invoices</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#invoice">Create Invoice</a>
+                        </li>
+                    </ul>
+                </aside>
+                <!-- end of white-smooth-wrapper -->
+            </div>
+            <!-- end of col-md-3 -->
+            <div class="col-md-9">
+                <!-- Tab panes -->
+                <!-- Tab panes -->
+                <div class="tab-content white-smooth-wrapper no-margin">
+                    <div class="tab-pane container" id="all-profiles">
+                        <div class="border-table widget-wrapper-sm">
+                            <div class="table-head clearfix">
+                                <p class="float-left">Profile List</p>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table allUserTable table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="img-th">Id</th>
+                                            <th>User Name</th>
+                                            <th>Email Id</th>
+                                            <th>Designation</th>
+                                            <th>Status</th>
+                                            <th>Rating</th>
+                                            <th>View</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0;i < userList.length; i++) {%>
+                                        <tr>
+                                            <td> <%= i+1 %> </td>
+                                            <td><%= userList[i].dataValues.name %> </td>
+                                            <td> <%= userList[i].dataValues.email %> </td>
+                                            <td> <%= userList[i].dataValues.position %> </td>
+                                            <td> <%= userList[i].dataValues.status === 1 ? 'Pending' : userList[i].dataValues.status === 2 ? 'Approved' : userList[i].dataValues.status === 3 ? 'Rejected' : 'Delected' %>
+                                            </td>
+
+                                            <td class="action-td">
+                                                <select class="mb-0 selectRating" id="<%- userList[i].dataValues.id %>">
+                                                    <option value="1"
+                                                        <%= userList[i].dataValues.rating === 'Level 1' ? "selected" : "" %>>
+                                                        Level 1
+                                                    </option>
+                                                    <option value="2"
+                                                        <%= userList[i].dataValues.rating === 'Level 2' ? "selected" : "" %>>
+                                                        Level 2
+                                                    </option>
+                                                    <option value="3"
+                                                        <%= userList[i].dataValues.rating === 'Level 3' ? "selected" : "" %>>
+                                                        Level 3
+                                                    </option>
+                                                    <option value="4"
+                                                        <%= userList[i].dataValues.rating === 'Level 4' ? "selected" : "" %>>
+                                                        Level 4
+                                                    </option>
+                                                    <option value="5"
+                                                        <%= userList[i].dataValues.rating === 'Level 5' ? "selected" : "" %>>
+                                                        Level 5
+                                                    </option>
+                                                    <option value="6"
+                                                        <%= userList[i].dataValues.rating === 'Level 6' ? "selected" : "" %>>
+                                                        Level 6
+                                                    </option>
+                                                </select>
+                                            </td>
+                                            <td> <a href="/auth/profile_details/<%- userList[i].dataValues.id %>">View
+                                                    Profile</a> </td>
+                                        </tr>
+                                        <% } %>
+                                    </tbody>
+                                </table>
+                                <!-- end of sm-custom-table -->
+                            </div>
+                            <!-- end of table-responsive -->
+                        </div>
+                    </div>
+                    <div class="tab-pane container active" id="newregister">
+                        <div class="border-table widget-wrapper-sm">
+                            <div class="table-head clearfix">
+                                <p class="float-left">New Regiester Profile</p>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table sm-custom-table newUserTable table-striped table-bordered nowrap">
+                                    <thead>
+                                        <tr>
+                                            <th class="img-th">Id</th>
+                                            <th>User Name</th>
+                                            <th>Email Id</th>
+                                            <th>Designation</th>
+                                            <th>Admin</th>
+                                            <td>Status</td>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(let i=0;i< newUserList.length ; i++ ){%>
+                                        <tr>
+                                            <td> <%= i+1 %> </td>
+                                            <td><%= newUserList[i].name  %> </td>
+                                            <td> <%= newUserList[i].email  %></td>
+                                            <td> <%= newUserList[i].position  %> </td>
+                                            <td class="action-td">
+                                                <select class="mb-0 adminId<%- newUserList[i].id %>">
+                                                    <option selected>Select Admin</option>
+                                                    <% for(let j=0;j< adminList.length;j++){ %>
+                                                    <option value="<%- adminList[j].dataValues.id  %>">
+                                                        <%= adminList[j].dataValues.name  %>
+                                                        (<%= adminList[j].dataValues.position %>)</option>
+                                                    <%}%>
+                                                </select>
+                                            </td>
+                                            <td class="action-td">
+                                                <button class="disabled mailSendBtn" id= <%- newUserList[i].id  %>
+                                                    >Send</button>
+                                            </td>
+
+
+                                        </tr>
+                                        <%}%>
+
+                                    </tbody>
+                                </table>
+                                <!-- end of sm-custom-table -->
+                            </div>
+                            <!-- end of table-responsive -->
+                        </div>
+                    </div><!-- tab notification end-->
+                    <div class="tab-pane container" id="notification">
+                        <div class="row">
+                            <% if(profRequestedList.length > 0){ %>
+                                        <div class="alert alert-info mb-2 d-block w-100" role="alert">New Profiles are waiting for Approval</div>
+                                        <% }else{ %>
+                                        <div class="alert alert-info mb-2 d-block w-100 text-center" role="alert">No new
+                                            Profiles
+                                            waiting for Approval</div>
+                                        <%}%>
+                            <% for(let i=0; i < profRequestedList.length ; i++){ %>
+                                        <div class="col-sm-4">
+                                            <div class="card h-100">
+                                                <div class="card-body">
+                                                    <a href="#"
+                                                        class="btn <%= profRequestedList[i].dataValues.profile_type_request === 1 ? 'btn-primary' : 'btn-warning' %> profileButton"
+                                                        id="<%= profRequestedList[i].dataValues.id %>"
+                                                        data-id="<%= profRequestedList[i].dataValues.profile_type_request %>"><%= profRequestedList[i].dataValues.profile_type_request === 1 ? 'Make Approval' : 'Make Rejected' %></a>
+                                                    <p class="card-text">Feedback -
+                                                        <%= profRequestedList[i].dataValues.feedback == null ? '---' : profRequestedList[i].dataValues.feedback %>
+                                                    </p>
+
+                                                    <h5 class="card-title">Name -
+                                                        <%= profRequestedList[i].dataValues.name %> </h5>
+                                                    <h5 class="card-title">Position -
+                                                        <%= profRequestedList[i].dataValues.position %> </h5>
+                                                    <h6 class="card-title">Email Id -
+                                                        <%= profRequestedList[i].dataValues.email %> </h6>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <% } %>
+                                        <!-- <div class="col-sm-4">
+                                <div class="card h-100">
+                                    <div class="card-body">
+                                        <a href="#" class="btn btn-warning">Make Rejected</a>
+                                        <p class="card-text">Feedback : supporting text below as a natural lead-in to
+                                            additional content.</p>
+
+                                        <h5 class="card-title">Name</h5>
+                                        <h5 class="card-title">Position</h5>
+                                        <h6 class="card-title">Email Id</h6>
+
+                                    </div>
+                                </div>
+                            </div> -->
+                            </div>
+                        </div>
+                        <div class="tab-pane container fade" id="all-projects">
+                            <div class="border-table widget-wrapper-sm">
+                                <div class="table-head clearfix">
+                                    <p class="float-left">Project List</p>
+
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table sm-custom-table">
+                                        <thead>
+                                            <tr>
+                                                <th class="img-th">Si.No</th>
+                                                <th>User Name</th>
+                                                <th>Project Name</th>
+                                                <th>Department</th>
+                                                <th>Assign by</th>
+                                                <th>Status</th>
+                                                <th>Staging</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                            <% for(let i=0;i < projectDetails.length ; i++){ %>
+                                            <tr>
+                                                <td> <%= i+1 %> </td>
+
+                                                <td>
+                                                    <% let output=[] %>
+                                                    <% if(projectDetails[i].user.length > 0){ %>
+                                                    <% for(let j=0;j < projectDetails[i].user.length ; j++){ %>
+                                                    <% output.push(projectDetails[i].user[j].dataValues.name) %>
+                                                    <% } %>
+                                                    <%= output.join(", ") %>
+                                                </td>
+                                                <%}else{%>
+                                                <td> <%= projectDetails[i].user[0].dataValues.name %> </td>
+                                                <%}%>
+                                                    <td> <%= projectDetails[i].project.dataValues.name %> </td>
+                                                <td> <%= projectDetails[i].project.Category.dataValues.name %> </td>
+                                                <td> Deepa </td>
+                                                <td class="action-td">
+                                                    <div class="active">
+                                                        <%= projectDetails[i].project.dataValues.status === 1 ? 'Active' : 'In-active' %>
+                                                    </div>
+                                                </td>
+                                                <td class="action-td">
+                                                    <div class="active">
+                                                        <%= projectDetails[i].project.dataValues.staging === 1 ? 'Live' : projectDetails[i].project.dataValues.staging === 2 ? 'Testing' : projectDetails[i].project.dataValues.staging === 3 ? 'Completed' :projectDetails[i].project.dataValues.staging === 4 ? 'Hold' : 'Deffered' %>
+                                                    </div>
+                                                </td>
+
+                                            </tr>
+                                            <% } %>
+
+                                        </tbody>
+                                    </table>
+                                    <!-- end of sm-custom-table -->
+                                </div>
+                                <!-- end of table-responsive -->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade col-md-12" id="new-projects">
+                            <div class="border-table widget-wrapper-sm px-2">
+                                <div class="table-head clearfix">
+                                    <h4 class="text-center">Add New Project</h4>
+
+                                </div>
+
+                                <!-- end of invoice-img-upload-wrapper -->
+                                <section class="inner-wrapper-invoice">
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="input-wrapper-sm">
+                                                <label>Project Name</label>
+                                                <input type="text" class="projName" name="c_name"
+                                                    placeholder="Project Name">
+                                            </div>
+                                            <div class="input-wrapper-sm">
+                                                <label>Project Department</label>
+                                                <select class="categoryId">
+                                                    <option value="0" selected>Select department</option>
+                                                    <% for(let i=0;i < categoryList.length;i++ ){ %>
+                                                    <option value="<%- categoryList[i].dataValues.id %>">
+                                                        <%- categoryList[i].dataValues.name %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <!-- end of input-wrapper-sm -->
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="input-wrapper-sm">
+                                                <label>Start Date</label>
+                                                <input type="date" class="startDate" name="c_name" placeholder="Date">
+                                            </div>
+                                            <div class="input-wrapper-sm">
+                                                <label>End Date</label>
+                                                <input type="date" class="endDate" name="c_name" placeholder="Date">
+                                            </div>
+                                        </div>
+                                        <!-- end of input-wrapper-sm -->
+                                        <div class="col-md-6">
+                                            <div class="input-wrapper-sm">
+                                                <label> Project Lead</label>
+                                                <input type="text" class="leadName" name="onboard"
+                                                    placeholder="Project Lead">
+                                            </div>
+                                            <div class="input-wrapper-sm">
+                                                <label> Assign By</label>mainAdminList
+                                                <select class="assignBy">
+                                                    <% for(let i=0;i < mainAdminList.length;i++ ){ %>
+                                                    <option value="<%- mainAdminList[i].dataValues.id %>">
+                                                        <%- mainAdminList[i].dataValues.name %></option>
+                                                    <% } %>
+                                                </select>
+                                            </div>
+                                            <div class="input-wrapper-sm">
+                                                <label>User Name</label>
+                                                <select
+                                                    class="js-example-placeholder-multiple js-states form-control userClass"
+                                                    multiple="multiple"></select>
+                                            </div>
+                                        </div>
+                                        <!-- end of input-wrapper-sm -->
+                                        <div class="col-md-6">
+                                            <div class="input-wrapper-sm">
+                                                <label>Staging</label>
+                                                <select class="statging">
+                                                    <option value="1">Live stage</option>
+                                                    <option value="2">Test stage</option>
+                                                    <option value="3">Completed</option>
+                                                    <option value="4">On Hold</option>
+                                                    <option value="5">Deffered</option>
+                                                </select>
+                                            </div>
+                                            <!-- end of input-wrapper-sm -->
+
+                                            <div class="input-wrapper-sm">
+                                                <label>Status</label>
+                                                <select class="projStatus">
+                                                    <option value="1">Active</option>
+                                                    <option value="0">Inactive </option>
+
+                                                </select>
+                                            </div>
+                                            <a
+                                                class="mt-4 btn sm-custom-btn sm-save-btn btn-primary d-block addProject">Add
+                                                New Project</a>
+                                        </div>
+                                    </div>
+                                </section>
+                                <!-- end of inner-wrapper-invoice -->
+                            </div>
+                        </div>
+                        <div class="tab-pane container fade" id="invoice-details">
+
+                            <div class="table-head clearfix">
+                                <p class="float-left">Invoice List</p>
+
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table sm-custom-table ">
+                                    <thead>
+                                        <tr>
+                                            <th class="img-th">ID</th>
+                                            <th>Date</th>
+                                            <th>Project Name</th>
+                                            <th>Project Cost</th>
+                                            <th>Project Duration</th>
+                                            <th>Created By</th>
+                                            <th>Action</th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <% for(var i=0; i < invoiceList.length ; i++){ %>
+                                        <tr>
+                                            <td> <%= i+1 %></td>
+                                            <td><%= new Date(invoiceList[i].date).toLocaleDateString("en-US") %> </td>
+                                            <td> <%= invoiceList[i].dataValues.Project.name %> </td>
+                                            <td> <%= invoiceList[i].amount %> </td>
+                                            <td> <%= invoiceList[i].total_days %> days </td>
+                                            <td> <%= invoiceList[i].dataValues.User.name %> </td>
+                                            <td> <a href="#" data-toggle="modal" class="invoiceView"
+                                                    data-id="<%= invoiceList[i].id %>"
+                                                    data-target=".bd-example-modal-lg">View</a>
+                                            </td>
+                                        </tr>
+                                        <% } %>
+
+                                    </tbody>
+                                </table>
+                                <!-- end of sm-custom-table -->
+                            </div>
+                            <!-- end of table-responsive -->
+
+
+                        </div>
+                        <div class="tab-pane container fade" id="invoice">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="input-wrapper-sm">
+                                        <label>Date</label>
+                                        <input type="date" class="date" name="c_name" placeholder="Date">
+                                    </div>
+                                    <!-- end of input-wrapper-sm -->
+                                </div>
+                                <!-- end of col-md-6 -->
+                                <div class="col-md-6">
+                                    <div class="input-wrapper-sm">
+                                        <label>Invoice No</label>
+                                        <input type="text" class="invoiceNum" name="v_number" placeholder="Invoice No">
+                                    </div>
+                                    <!-- end of input-wrapper-sm -->
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-wrapper-sm">
+                                        <label>Project Department</label>
+                                        <select class="projId">
+                                            <option value="0" selected>Select project</option>
+                                            <% for(let i=0;i < projectDetails.length;i++ ){ %>
+                                            <option value="<%- projectDetails[i].project.dataValues.id %>">
+                                                <%- projectDetails[i].project.dataValues.name %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- end of col-md-6 -->
+                                <div class="col-md-6">
+                                    <div class="input-wrapper-sm">
+                                        <label>Invoice To</label>
+                                        <select
+                                            class="js-example-placeholder-multiple js-states form-control invoiceUsers"
+                                            multiple="multiple">
+                                            <% for(let i=0;i < userList.length ; i++){ %>
+                                            <option value="<%= userList[i].dataValues.id %>">
+                                                <%= userList[i].dataValues.name %></option>
+                                            <%}%>
+                                </select>
+                <!-- <input type="text" name="website" placeholder="Invoice To"> -->
+            </div>
+            <!-- end of input-wrapper-sm -->
+        </div>
+        <!-- end of col-md-6 -->
+        <div class="col-md-6">
+            <div class="input-wrapper-sm">
+                <label>Description</label>
+                <input type="text" class="desc" name="c_email" placeholder="Description">
+            </div>
+            <!-- end of input-wrapper-sm -->
+        </div>
+        <!-- end of col-md-6 -->
+        <div class="col-md-6">
+            <div class="input-wrapper-sm">
+                <label>Days</label>
+                <input type="text" name="country" class="totalDays" placeholder="Days">
+            </div>
+            <!-- end of input-wrapper-sm -->
+        </div>
+        <!-- end of col-md-6 -->
+        <div class="col-md-6">
+            <div class="input-wrapper-sm">
+                <label>Amount</label>
+                <input type="text" name="city" class="amount" placeholder="Amount">
+            </div>
+            <!-- end of input-wrapper-sm -->
+        </div>
+        <!-- end of col-md-6 -->
+        <div class="col-md-12">
+            <div class="input-wrapper-sm">
+                <label>Project Details</label>
+                <textarea name="address" class="details" placeholder="Project Details"></textarea>
+            </div>
+            <!-- end of input-wrapper-sm -->
+        </div>
+        <!-- end of col-md-12 -->
+    </div>
+    <div class="form-footer clearfix">
+        <a href="#" class="btn sm-custom-btn sm-save-btn float-right invoiceSaveBtn">Save</a>
+        <a href="#" class="btn sm-custom-btn float-right">Clear</a>
+    </div>
+</div>
+
+</div>
+
+
+</div>
+<!-- end of col-md-10 -->
+</div>
+<!-- end of row-->
+
+</div>
+<!-- end of container-fluid-->
+</section>
+<!-- end of merchant-table -->
+
+
+<!--invoice modal-->
+<div class="modal fade bd-example-modal-lg invoiceModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="white-smooth-wrapper no-margin">
+                <div class="wrapper-head semi-head-border">
+                    <section class="invoice-design-sec white-smooth-wrapper no-margin">
+                        <div class="invoice-head">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h2>Invoice</h2>
+                                </div>
+                                <!-- end of col-md-6 -->
+                                <div class="col-md-6">
+                                    <div class="invoice-logo-wrapper">
+                                        <img src="../images/invoice-logo.png" class="img-fluid" alt="">
+                                        <div class="invoice-address">
+                                            <p> Cecilia Chapman, 711-2880 Nulla St, Mankato <span>Mississippi
+                                                    96522</span></p>
+                                        </div>
+                                        <!-- end of invoice-address -->
+                                    </div>
+                                    <!-- end of invoice-logo-wrapper -->
+                                </div>
+                                <!-- end of col-md-6 -->
+                            </div>
+                            <!-- end of row -->
+                        </div>
+                        <!-- end of invoice-head -->
+                        <div class="invoice-details">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <h4>Date</h4>
+                                    <p class="invoice_date">15 Jan 2017</p>
+                                </div>
+                                <!-- end of col-md-4 -->
+                                <div class="col-md-4">
+                                    <h4>Invoice No.</h4>
+                                    <p class="invoice_num">INV0012568</p>
+                                </div>
+                                <!-- end of col-md-4 -->
+                                <div class="col-md-4">
+                                    <h4>Invoice To</h4>
+                                    <p class="invoice_to">Lorem ipsum dolor sit amet consectetur <span>adipisicing elit</span></p>
+                                </div>
+                                <!-- end of col-md-4 -->
+                            </div>
+                            <!-- end of row -->
+                        </div>
+                        <!-- end of invoice-details -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="invoice-body">
+                                    <table class="table invoiceTable">
+                                        <thead>
+                                            <tr>
+                                                <th>Description</th>
+                                                <!-- <th class="right-align-data">Hours</th> -->
+                                                <!-- <th class="right-align-data">Rate</th> -->
+                                                <th class="right-align-data">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td class="desc">Creative Design</td>
+                                                <!-- <td class="action-td">80</td> -->
+                                                <!-- <td class="action-td">$40.00</td> -->
+                                                <td class="action-td amount">$3200.00</td>
+                                            </tr>
+                                            
+                                           
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- end of invoice-body -->
+                            </div>
+                            <!-- end of col-md-12 -->
+                        </div>
+                        <!-- end of row -->
+                        <div class="invoice-footer">
+                            <div class="row">
+                                <div class="col-md-5">
+                                    Terms and Conditions
+                                    These sizes kick in at certain breakpoints to avoid horizontal scrollbars on
+                                    narrower viewports.
+                                    These sizes kick in at certain breakpoints to avoid horizontal scrollbars on
+                                    narrower viewports.
+                                    These sizes kick in at certain breakpoints to avoid horizontal scrollbars on
+                                    narrower viewports.
+
+
+                                </div>
+                                <!-- end of col-md-5 -->
+                                <div class="col-md-7">
+                                    <div class="invoice-total">
+                                        <ul>
+                                            <li>
+                                                <p>Total Amount</p>
+                                            </li>
+                                            <li>
+                                                <h3 class="total_amount">$500.00</h3>
+                                            </li>
+                                            <li>
+                                                <p>Taxes Included</p>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <!-- end of invoice-total -->
+                                </div>
+                                <!-- end of col-md-7 -->
+                            </div>
+                            <!-- end of row -->
+                        </div>
+                        <!-- end of invoice-footer -->
+                    </section>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<%- include ('./layouts/footer') %>
+                                            <script src="/js/allpages/mainadmin.js"></script>

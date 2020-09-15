@@ -1,0 +1,256 @@
+<%- include ('./layouts/header') %>
+<style>
+    .profile-detils input {
+        width: 100%;
+        border: none;
+        background-color: #F9F9F9;
+        margin-bottom: 15px;
+    }
+
+    .title {
+
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+    }
+</style>
+<header class="masthead text-center text-white"> </header>
+<span class="sessionClass" style="display: none;"><%- sessionData %></span>
+
+
+<!-- List of user profiles -->
+<section>
+    <div class="container mt-5">
+        <div class="row">
+            <% if(userData[0].dataValues.status === 3){ %>
+            <div class="alert alert-info mb-2 d-block w-100" role="alert">Profile has been rejected</div>
+            <% } %>
+            <div class="col-lg-4">
+                <div class="profile text-center bg-grey px-3 appendUserPortfolio">
+                    <div class="avatar">
+                        <img src="/img/image-1590988389220.jpg"" alt=" Circle Image"
+                            class="img-raised rounded-circle img-fluid profilePic">
+                    </div>
+                    <div class="p-image">
+                        <i class="fa fa-camera upload-button hide" style="display: none;"></i>
+                        <input class="file-upload hidden " type="file" accept="image/*" style="display: none;">
+                    </div>
+                    <div class="name">
+                        <h3 class="username">Christian Louboutin</h3>
+                        <h6 class="catName">Designer</h6>
+
+                        <span class="badge badge-info mr-2 p-2 levelClass">Level 1</span>
+                        <i class="fa fa-check-square-o approved" aria-hidden="true" style="display: none;">Approved</i>
+                        <i class="fa fa-pause pending" aria-hidden="true" style="display: none;">Pending</i>
+                        <i class="fa fa-ban rejected" aria-hidden="true" style="display: none;">Rejected </i>
+                        <div class="float-right center1 txt-center mt-3">
+                            <div class='float-right no-right-pad no-left-pad swith-row'>
+                                <div class="switch">
+                                    <input type="radio" class="switch-input user_radio_btn availableBtn" name="type"
+                                        value="user" id="one">
+                                    <label for="one" class="switch-label switch-label-off">
+                                        <span>Available</span>
+                                    </label>
+                                    <input type="radio" class="switch-input admin_radio_btn unavailableBtn" name="type"
+                                        value="admin" id="two">
+                                    <label for="two" class="switch-label switch-label-on">
+                                        <span>Unavailable</span>
+                                    </label>
+                                    <span class="slider2"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr style="margin:5px 0 5px 0;">
+                    <div class="profile-detils text-left mt-3">
+                        <div class="input_test input_value"><span class="title position">Test lead</span><br>
+                            <input class="location input_value" name="name" value="sibasankar" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Assigned Project</span><br>
+                            <input class="projectName" name="name" value="sibasankar" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Email</span><br>
+                            <input class="emailid" name="name" value="sibasankar.bhoi2k@gmail.com" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Phone</span><br>
+                            <input class="input_value contactNum" name="name" value="1234567890" disabled=""><br></div>
+
+                        <div class="input_test"> <span class="title">Sub Category</span><br>
+                            <input class="subCatName" name="name" value="sibasankar Sub Category" disabled=""><br></div>
+
+
+                        <div class="input_test hidden_input hidden" style="display: none;"><span class="title">
+                                Category</span><br>
+                            <select class="catId hidden_input1">
+                                <option> Select Sub Category</option>
+                            </select><br></div>
+                        <div class="input_test hidden_input hidden" style="display: none;"><span class="title">Sub
+                                Category</span><br>
+                            <select class="subcatClass hidden_input1 disabled">
+                                <option> Select Category</option>
+                            </select><br></div>
+
+                        <div class="input_test"> <span class="title">Skill Set</span><br>
+                            <div class="allSkills input_value" disabled="">efwrwe,ewrewrewr,ewrewrew</div><br>
+                        </div>
+                        <div class="input_test"> <span class="title">Portfolio URL</span><br>
+                            <input class="portURL input_value" name="name" value="sibasankar Skill Set" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">About</span><br>
+                            <div class="about input_value" disabled="">hfehsdhf weurfewhrf rhewrfw wrutg wrtrwtjrw
+                                htreht retherjtn
+                                ertnjrethre terhtgre terkhjtnre tuegre tgreuhgrje tiuer tgnreiutg</div><br>
+                        </div>
+                        <div class="input_test"><span class="title">Feed Back</span><br>
+                            <div class="feedbackClass">hfehsdhf weurfewhrf rhewrfw wrutg wrtrwtjrw
+                                htreht retherjtn
+                                ertnjrethre terhtgre terkhjtnre tuegre tgreuhgrje tiuer tgnreiutg</div><br>
+                        </div>
+
+                        <div class="editBtn">
+                            <button type="button" id="editButton" class="btn btn-info editBtnClass">Edit</button>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                </div>
+
+                <% if(sessionData === true && role === 'admin'){ %>
+                <div class="">
+                    <div class="profile_btn">
+                        <button id="approve" class="button btn-info approveBtn">Approve</button>
+                        <button id="reject" class="button btn-danger rejectBtn">Reject</button>
+                    </div>
+
+                </div>
+                <% }else if(sessionData === false){ %>
+                <div class="">
+                    <div class="profile_btn">
+                        <button id="approve" class="button btn-info approveBtn">Approve</button>
+                        <button id="reject" class="button btn-danger rejectBtn">Reject</button>
+                    </div>
+                </div>
+                <% }else{ %>
+                <div class="">
+                </div>
+                <%}%>
+            </div>
+            <div class="col-lg-8 profieImgClass" >
+                <h3 class="d-inline">Recent Work</h3>
+                    <span class="mb-2" style="float: right;">
+                        <button type="button" class=" btn btn-default editImageBtn">
+                                               <i class="fa fa-edit editImageBtn" aria-hidden="true"> Edit</i></button>
+                       </span>
+                <div class="pb-3 renderImg">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3 img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                </div>
+
+                <div class="field hide" style="display: none;" align="left">
+                    <h5>Upload latest designs</h5>
+                    <div class="preloaded-images">
+                        <div class="edited_imges row"></div>
+                    </div>
+                    <input type="file" id="uploadFiles" name="files[]" multiple />
+                  </div>
+
+                <button type="button" id="uploadButton" style="display: none;"
+                class="btn btn-info uploadBtn my-3">Upload</button>
+            </div>
+            <div class="modal fade" id="myModal" role="dialog">
+                <div class="modal-dialog">
+
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close"
+                                data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Preview Details</h4>
+                        </div>
+                        <div class="modal-body">
+                            <div class="clearfix">
+                                <hr style="margin:5px 0 5px 0;">
+
+                                <div class="input_test"><span
+                                        class="title positionModal">Name</span><br>
+
+                                </div>
+                                <div class="input_test"><span
+                                        class="title locationModal">Name</span><br>
+
+                                </div>
+                                <div class=""><span class="title">Email</span><br>
+                                    <input class="emailidModal" name="name"
+                                        value="sibasankar.bhoi2k@gmail.com" disabled><br>
+                                </div>
+                                <div class=""><span class="title">Phone</span><br>
+                                    <input class=" contactNumModal" name="name"
+                                        value="1234567890" disabled><br>
+                                </div>
+                                <div class=""><span class="title">Sub
+                                        Category</span><br>
+                                    <input class="categoryModal" name="name"
+                                        value="sibasankar Sub Category" disabled><br></div>
+                                <div class=""><span class="title">Sub
+                                        Category</span><br>
+                                    <input class="subCatNameModal" name="name"
+                                        value="sibasankar Sub Category" disabled><br></div>
+
+                                <div class=""><span class="title">Skill
+                                        Set</span><br>
+                                    <div class="allSkillsModal " disabled>In case of
+                                        rejected working
+                                        hours,
+                                        the
+                                        employee
+                                        will get a notification – Change attendance
+                                        manually. In that
+                                        scenario the employee will have to raise a step out/
+                                        hour adjustment
+                                        request
+                                    </div>
+                                </div>
+                                <div class=""><span class="title">Portfolio
+                                        URL</span><br>
+                                    <input class="portURLModal " name="name" value=""
+                                        disabled><br>
+                                </div>
+                                <div class=""><span class="title">About</span><br>
+                                    <!--                                        <input class="" name="name" value="In case of rejected working hours, the employee will get a notification – Change attendance manually. In that scenario the employee will have to raise a step out hour adjustment request " disabled><br>-->
+                                    <div class="aboutModal " disabled>In case of
+                                        rejected working
+                                        hours,
+                                        the
+                                        employee
+                                        will get a notification – Change attendance
+                                        manually. In that
+                                        scenario the employee will have to raise a step out/
+                                        hour adjustment
+                                        request
+                                    </div>
+                                    <br>
+                                </div>
+
+                                <!-- /.box-body -->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default"
+                                data-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<%- include ('./layouts/footer') %>
+
+                <script src="/js/allpages/portfoliodetails.js"></script>
+                <script src="/js/allpages/dashboard.js"></script>

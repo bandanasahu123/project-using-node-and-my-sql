@@ -1,0 +1,142 @@
+<%- include ('./layouts/header') %>
+<style>
+    .profile-detils input {
+        width: 100%;
+        border: none;
+        background-color: #F9F9F9;
+        margin-bottom: 15px;
+    }
+
+    .title {
+
+        font-weight: 600;
+        font-size: 16px;
+        color: black;
+    }
+</style>
+<header class="masthead text-center text-white"> </header>
+<span class="sessionClass" style="display: none;"><%- sessionData %></span>
+
+
+<!-- List of user profiles -->
+<section>
+    <div class="container-fluid mt-5">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="profile text-center bg-grey px-3">
+                    <div class="avatar">
+                        <img src="/img/image-1590988389220.jpg"" alt=" Circle Image"
+                            class="img-raised rounded-circle img-fluid profilePic">
+                    </div>
+                    <div class="name">
+                        <h3 class="username">Christian Louboutin</h3>
+                        <h6 class="catName">Designer</h6>
+
+                        <span class="badge badge-info mr-2 p-2 levelClass">Level 1</span>
+                        <i class="fa fa-check-square-o approved" aria-hidden="true" style="display: none;">Approved</i>
+                        <i class="fa fa-pause pending" aria-hidden="true" style="display: none;">Pending</i>
+                        <i class="fa fa-ban rejected" aria-hidden="true" style="display: none;">Rejected </i>
+                        <i class="fa fa-user-circle-o available" aria-hidden="true" style="display: none;">Available</i>
+                        <i class="fa fa-ban unavailable" aria-hidden="true" style="display: none;">Unavailable</i>
+                    </div>
+                    <hr style="margin:5px 0 5px 0;">
+                    <div class="profile-detils text-left">
+                        <div class="input_test"><span class="title position">Test lead</span><br>
+                            <input class="location" name="name" value="sibasankar" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Assigned Project</span><br>
+                            <input class="projectName" name="name" value="sibasankar" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Email</span><br>
+                            <input class="emailid" name="name" value="sibasankar.bhoi2k@gmail.com" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">Phone</span><br>
+                            <input class="" name="name" value="1234567890" disabled=""><br></div>
+
+                        <div class="input_test"> <span class="title">Sub Category</span><br>
+                            <input class="subCatName" name="name" value="sibasankar Sub Category" disabled=""><br></div>
+                        <div class="input_test"> <span class="title">Skill Set</span><br>
+                            <div class="allSkills input_value" disabled="">efwrwe,ewrewrewr,ewrewrew</div><br>
+                        </div>
+                        <div class="input_test"> <span class="title">Portfolio URL</span><br>
+                            <input class="portURL" name="name" value="sibasankar Skill Set" disabled=""><br>
+                        </div>
+                        <div class="input_test"><span class="title">About</span><br>
+                            <!--                                        <input class="" name="name" value="In case of rejected working hours, the employee will get a notification – Change attendance manually. In that scenario the employee will have to raise a step out hour adjustment request " disabled><br>-->
+                            <div class="about" disabled="">hfehsdhf weurfewhrf rhewrfw wrutg wrtrwtjrw htreht retherjtn
+                                ertnjrethre terhtgre terkhjtnre tuegre tgreuhgrje tiuer tgnreiutg</div><br>
+                        </div>
+                        <div class="input_test uploadCvFile">
+
+                        </div>
+                        <hr>
+                        <!-- <h3 class="input_test"><span class="title">Feedback From Origami</span><br>
+                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                            <div class="about" disabled=""> Lorem ipsum</div><br>
+                        </h3> -->
+                        <div>
+                            <p class="message title feedbackClass">The quick fox stuff</p>
+
+                            <form class="editForm" style="display: none;">
+                                <textarea rows="2" id="feedbackMessage" /></textarea>
+                            </form>
+                            <% if(sessionData === true && role === 'admin'){ %>
+                        <a href="#" class="edit-link">Edit Link</a>
+                        <a href="#" class="cancel">Cancel</a>
+                        <%}%>
+                            <!-- <a href="#" class="edit-link">Edit Link</a> -->
+                        </div>
+
+
+                        <!-- /.box-body -->
+                    </div>
+                    <% if(sessionData === true && role === 'admin'){ %>
+                        <div class="">
+                            <div class="profile_btn">
+                                <button id="approve" class="button btn-info approveBtn">Approve</button>
+                                <button id="reject" class="button btn-danger rejectBtn">Reject</button>
+                            </div>
+
+                        </div>
+                        <%}%>
+                </div>
+                
+            </div>
+            <div class="col-lg-8">
+                <h3>Recent Work</h3>
+                <div class="pb-3 renderImg">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3 img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                    <img src="/img/image-1590988389220.jpg" class="mb-3  img-fluid">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+<%- include ('./layouts/footer') %>
+
+                        <script src="/js/allpages/portfoliodetails.js"></script>
+                        <script src="/js/allpages/dashboard.js"></script>
+                        <script>
+                            $('a.edit-link').on('click', function (e) {
+                                e.preventDefault();
+                                var $parent = $(this).closest('div');
+                                $parent.find('p.message').hide();
+                                $parent.find('form.editForm').show();
+                                $parent.find('a.cancel').show();
+                                $(this).hide();
+                            });
+                            $('a.cancel').on('click', function (e) {
+                                e.preventDefault();
+                                var $parent = $(this).closest('div');
+                                $parent.find('p.message').show();
+                                $parent.find('form.editForm').hide();
+                                $parent.find('a.edit-link').show();
+                                $(this).hide();
+                            });
+                        </script>

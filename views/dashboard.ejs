@@ -1,0 +1,90 @@
+<%- include ('./layouts/header') %>
+
+<header class="masthead text-center text-white"> </header>
+<span class="sessionClass" style="display: none;"><%- sessionData %></span>
+
+<section class="categories-slider">
+    <div class="container-fluid px-0 py-2">
+        <div id="slider-container" class="slider">
+            <% for(var i=0;i < JSON.parse(data).length ; i++){ %>
+            <div class="slide image_text catgoryClass" data-id=<%=  JSON.parse(data)[i].id %>>
+
+                <img src="<%=  JSON.parse(data)[i].cat_image %>" alt="">
+                <div class="text_centered cat_name" val="<%=  JSON.parse(data)[i].id %>">
+                    <%=  JSON.parse(data)[i].name %></div>
+            </div>
+
+            <%}%>
+
+    <div onclick="prev()" class="control-prev-btn slider_arrow">
+        <i class="fa fa-angle-left" aria-hidden="true"></i>
+    </div>
+    <div onclick="next()" class="control-next-btn slider_arrow">
+        <i class="fa fa-angle-right" aria-hidden="true"></i>
+    </div>
+</div>
+<div class="subcategory appendSubcat" style="display: none;" >
+    <div class="d-flex justify-content-center">
+        <a href="#" class="SubCategory-label-30F mr-2">All Categories</a>
+        <a href="#" class="SubCategory-label-30F mr-2">Photography</a>  
+        </div>
+    
+</div> 
+
+</div>
+<div>
+
+<center>
+    <h2>Welcome to Origami Portal</h2>
+</center>
+<center>
+  <p> Showcase your work. Find new inspiration, hand-picked just for you.</p>
+</center> 
+
+<!-- <center>
+        <h2>Show All Categories</h2>
+    </center>
+    <center>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalPopovers">
+            Launch demo modal
+          </button>
+    </center> 
+
+
+</div>
+    
+<div id="exampleModalPopovers" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="exampleModalPopoversLabel" style="display: none;" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="gallery">
+            <% for(var i=0;i < JSON.parse(data).length ; i++){ %>
+
+            <div class="img-w image_text catgoryClass" data-id=<%=  JSON.parse(data)[i].id %> ">
+            <img src=" <%=  JSON.parse(data)[i].cat_image %>" alt="" />
+            <div class="text_centered"><%=  JSON.parse(data)[i].name %></div>
+
+        </div>
+        <%}%>
+          
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+           
+        </div>
+      </div>
+    </div>
+  </div>-->
+</section>
+
+
+<!-- List of user profiles -->
+<section>
+    <div class="container-fluid mt-5">
+        <div class="row align-items-center allUsersPortfolioClass">
+           
+        </div>
+    </div>
+</section>
+
+<%- include ('./layouts/footer') %>
+        <script src="/js/allpages/dashboard.js"></script>
