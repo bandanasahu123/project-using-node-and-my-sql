@@ -1,0 +1,12 @@
+{
+	"MAX_AGE": "10",
+	"CRYPTO_BYTE_SIZE": 128,
+	"ALGO_IN_USE": "sha256",
+	"APP_NAME": "Focal Apps",
+	"EMAIL_SOURCE": "laeeq.ali@origamicreative.com",
+	"RESET_PAGE": "http://172.104.190.228:3000/public/reset-password",
+	"LOGIN_PAGE": "http://172.104.190.228:3000/public/login",
+	"DASHBAORD_PAGE": "http://172.104.190.228:3000/auth/dashboard",
+	"tokenKey": "@#gsvdgad52312%R&^FD&B7st6GD^t9dqw9&7*w&tW",
+	"tokenTime": "4h"
+}
